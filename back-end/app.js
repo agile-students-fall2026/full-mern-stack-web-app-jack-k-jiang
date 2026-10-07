@@ -40,6 +40,11 @@ app.get('/messages', async (req, res) => {
   }
 })
 
+// a route to handle about us page
+app.get('/about', async(req, res) => {
+
+})
+
 // a route to handle fetching a single message by its id
 app.get('/messages/:messageId', async (req, res) => {
   // load all messages from database
