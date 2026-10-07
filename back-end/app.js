@@ -12,6 +12,7 @@ app.use(cors()) // allow cross-origin resource sharing
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 
+app.use('/imgs', express.static('imgs')) // serve files in back-end/imgs at /imgs/...
 // connect to database
 mongoose
   .connect(`${process.env.DB_CONNECTION_STRING}`)
@@ -41,8 +42,17 @@ app.get('/messages', async (req, res) => {
 })
 
 // a route to handle about us page
-app.get('/about', async(req, res) => {
+const paragraphs = [
+"My name is Jack Jiang. I'm a junior at NYU College of Arts. I'm currently majoring in Computer Science. I grew up in and currently live in Brooklyn, NY. This year I'm taking 3 CS classes and 1 Math class.",
+"Some of my hobbies include playing tennis, coding, and reading. Some of my favorite foods are: peanut butter, steak, pancakes, fried chicken, and more. I played various instruments in the past like the piano, violin, and the baritone horn."
+]
 
+const photo = "http://localhost:5002/imgs/profile.png"
+app.get('/about', (req, res) => {
+  res.json({
+    paragraphs: paragraphs,
+    photo: photo
+  })
 })
 
 // a route to handle fetching a single message by its id
