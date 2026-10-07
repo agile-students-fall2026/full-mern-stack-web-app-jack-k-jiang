@@ -41,11 +41,21 @@ app.get('/messages', async (req, res) => {
   }
 })
 
-// a route to handle about us page
-const paragraphs = [
-"My name is Jack Jiang. I'm a junior at NYU College of Arts. I'm currently majoring in Computer Science. I grew up in and currently live in Brooklyn, NY. This year I'm taking 3 CS classes and 1 Math class.",
-"Some of my hobbies include playing tennis, coding, and reading. Some of my favorite foods are: peanut butter, steak, pancakes, fried chicken, and more. I played various instruments in the past like the piano, violin, and the baritone horn."
-]
+const aboutText = `
+My name is Jack Jiang. I'm a junior at NYU College of Arts. I'm currently
+majoring in Computer Science. I grew up in and currently live in Brooklyn, NY.
+This year I'm taking 3 CS classes and 1 Math class.
+
+Some of my hobbies include playing tennis, coding, and reading. Some of my
+favorite foods are: peanut butter, steak, pancakes, fried chicken, and more.
+I played various instruments in the past like the piano, violin, and the
+baritone horn.
+`
+
+const paragraphs = aboutText
+  .trim()
+  .split(/\n\s*\n/)
+  .map(p => p.replace(/\s*\n\s*/g, ' '))
 
 const photo = "http://localhost:5002/imgs/profile.png"
 app.get('/about', (req, res) => {
